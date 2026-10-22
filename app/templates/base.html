@@ -1,0 +1,21 @@
+{#- The root layout every page extends. It only holds what EVERY page needs:
+    <head>, the stylesheet and the shared script. Layouts in layouts/ add
+    the header and footer on top of this. -#}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · Averon AI</title>
+  <meta name="description" content="{% block description %}Averon AI is an AI assistant that remembers your conversations.{% endblock %}">
+  <link rel="icon" href="{{ url_for('static', path='img/favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/styles.css') }}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  {% block body %}{% endblock %}
+
+  {#- `defer` runs scripts after the HTML is parsed, so they can find elements. -#}
+  <script src="{{ url_for('static', path='js/main.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

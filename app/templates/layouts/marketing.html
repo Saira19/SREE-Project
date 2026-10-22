@@ -1,0 +1,12 @@
+{#- Layout for public pages: shared header + page content + shared footer.
+    A page extends this and fills {% block content %}. -#}
+{% extends "base.html" %}
+
+{% block body %}
+  <a class="skip" href="#main">Skip to content</a>
+  {% include "partials/header.html" %}
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/footer.html" %}
+{% endblock %}

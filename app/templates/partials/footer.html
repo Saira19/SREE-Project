@@ -1,0 +1,38 @@
+{% from "partials/icons.html" import icon, logo %}
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        {{ logo() }}
+        <p>Your AI assistant for writing, planning and research.</p>
+        {#- TODO (backend): add POST /api/v1/newsletter. For now main.js only confirms on the page. -#}
+        <form class="news" data-newsletter novalidate>
+          <label class="sr-only" for="news-email">Email address</label>
+          <input class="in" id="news-email" type="email" name="email" placeholder="Your email" autocomplete="email" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <p class="news-msg" role="status" data-newsletter-msg></p>
+      </div>
+      <div>
+        <h2 class="fhead">Product</h2>
+        <ul><li><a href="/#features">Features</a></li><li><a href="/#how">How it works</a></li><li><a href="/pricing">Pricing</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h2 class="fhead">Company</h2>
+        <ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="#">Careers</a></li></ul>
+      </div>
+      <div>
+        <h2 class="fhead">Legal</h2>
+        <ul><li><a href="#">Privacy policy</a></li><li><a href="#">Terms of service</a></li><li><a href="#">Cookie policy</a></li></ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© {{ 2026 }} Averon AI. All rights reserved.</span>
+      <div class="social">
+        <a href="#" aria-label="Instagram">{{ icon("instagram", 16) }}</a>
+        <a href="#" aria-label="LinkedIn">{{ icon("linkedin", 16) }}</a>
+        <a href="#" aria-label="X">{{ icon("x", 16) }}</a>
+      </div>
+    </div>
+  </div>
+</footer>

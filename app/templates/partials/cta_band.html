@@ -1,0 +1,14 @@
+{#- Closing call-to-action. Pages can override the text by setting
+    cta_title / cta_text / cta_button before including it. -#}
+{% from "partials/icons.html" import icon %}
+<section>
+  <div class="wrap">
+    <div class="band">
+      <div>
+        <h2>{{ cta_title | default("Ready to work smarter?") }}</h2>
+        <p>{{ cta_text | default("Create a free account and start your first conversation today.") }}</p>
+      </div>
+      <a class="btn" href="/register">{{ cta_button | default("Get started free") }} {{ icon("arrow", 16) }}</a>
+    </div>
+  </div>
+</section>

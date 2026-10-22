@@ -1,0 +1,68 @@
+{% extends "layouts/marketing.html" %}
+{% from "partials/icons.html" import icon %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span>Contact</span>
+    <h1>We'd love to hear from you</h1>
+    <p class="lede">Questions, feedback or partnership ideas — send us a message and we'll get back to you.</p>
+  </div>
+</section>
+
+<section class="pt-0">
+  <div class="wrap contact">
+    <div class="panel">
+      {#- TODO (backend): add POST /api/v1/contact. main.js validates the form and
+          shows a confirmation; it does not send anything yet. -#}
+      <form class="form" data-contact-form novalidate>
+        <div class="alert alert-ok" role="status" data-form-msg hidden></div>
+        <div class="row2">
+          <div class="field-wrap">
+            <label for="c-name">Full name</label>
+            <input class="input" id="c-name" name="name" autocomplete="name" required>
+            <p class="error" data-error-for="name" hidden>Please enter your name.</p>
+          </div>
+          <div class="field-wrap">
+            <label for="c-email">Email</label>
+            <input class="input" id="c-email" name="email" type="email" autocomplete="email" required>
+            <p class="error" data-error-for="email" hidden>Please enter a valid email.</p>
+          </div>
+        </div>
+        <div class="field-wrap">
+          <label for="c-topic">Topic</label>
+          <div class="select-wrap">
+            <select class="input" id="c-topic" name="topic">
+              <option>General question</option>
+              <option>Billing</option>
+              <option>Technical support</option>
+              <option>Partnership</option>
+            </select>
+            {{ icon("chevron", 18, "#5E5E66") }}
+          </div>
+        </div>
+        <div class="field-wrap">
+          <label for="c-message">Message</label>
+          <textarea class="input" id="c-message" name="message" rows="5" placeholder="Tell us how we can help…" required minlength="10"></textarea>
+          <p class="hint">Please don't include passwords or payment details.</p>
+          <p class="error" data-error-for="message" hidden>Please write at least 10 characters.</p>
+        </div>
+        <button class="btn btn-primary" type="submit">Send message</button>
+      </form>
+    </div>
+
+    <div class="info">
+      {% for ic, title, text in [
+        ("mail", "Email us", "hello@averon.ai<br>We reply within one business day."),
+        ("chat", "Help centre", "Guides and answers to common questions."),
+        ("pin", "Office", "Lahore, Pakistan<br>Mon–Fri, 9:00–18:00 PKT")
+      ] %}
+        <div class="panel info-item">
+          <div class="ic">{{ icon(ic, 22, "#4B3BF5") }}</div>
+          <div><h3>{{ title }}</h3><p>{{ text | safe }}</p></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

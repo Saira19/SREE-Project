@@ -1,0 +1,45 @@
+{% from "partials/icons.html" import icon, logo %}
+{% set nav = [
+  ("Home", "/"), ("Features", "/#features"), ("How it works", "/#how"),
+  ("Pricing", "/pricing"), ("About", "/about"), ("Contact", "/contact")
+] %}
+<header class="site-header" data-header>
+  <div class="wrap nav">
+    {{ logo() }}
+
+    <nav class="links" aria-label="Main">
+      {% for label, href in nav %}
+        <a href="{{ href }}"{% if label == active %} class="active" aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="actions">
+      {#- main.js shows one of these two groups depending on whether a login token exists -#}
+      <span class="guest-only">
+        <a class="login" href="/login">Log in</a>
+        <a class="btn btn-primary" href="/register">Get started</a>
+      </span>
+      <a class="btn btn-primary user-only" href="/dashboard" hidden>Open dashboard</a>
+
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="i-open">{{ icon("menu", 20) }}</span>
+        <span class="i-close">{{ icon("close", 20) }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="wrap" aria-label="Mobile">
+      {% for label, href in nav %}
+        <a href="{{ href }}"{% if label == active %} class="active" aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+      <div class="mobile-actions guest-only">
+        <a class="btn btn-ghost" href="/login">Log in</a>
+        <a class="btn btn-primary" href="/register">Get started</a>
+      </div>
+      <div class="mobile-actions user-only" hidden>
+        <a class="btn btn-primary" href="/dashboard">Open dashboard</a>
+      </div>
+    </nav>
+  </div>
+</header>

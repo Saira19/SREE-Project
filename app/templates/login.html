@@ -1,0 +1,38 @@
+{% extends "layouts/auth.html" %}
+{% from "partials/icons.html" import icon %}
+
+{% set side_title = "Pick up right where you left off." %}
+{% set side_points = ["All your conversations, saved", "Works on phone and laptop", "Private and secure login"] %}
+
+{% block top_link %}New here? <a href="/register">Create an account</a>{% endblock %}
+
+{% block form %}
+<h1>Welcome back</h1>
+<p class="sub">Log in to continue your conversations.</p>
+
+{#- auth.js fills this with the API's error message (e.g. wrong password) -#}
+<div class="alert" role="alert" data-form-error hidden>
+  {{ icon("alert", 18) }}<span data-form-error-text></span>
+</div>
+
+<form class="form" data-auth-form="login" novalidate>
+  <div class="field-wrap">
+    <label for="l-email">Email</label>
+    <input class="input" id="l-email" name="email" type="email" autocomplete="email" required>
+    <p class="error" data-error-for="email" hidden>Please enter a valid email.</p>
+  </div>
+  <div class="field-wrap">
+    <label for="l-password">Password</label>
+    <div class="pw-wrap">
+      <input class="input" id="l-password" name="password" type="password" autocomplete="current-password" required>
+      <button class="pw-toggle" type="button" aria-label="Show password" data-pw-toggle>{{ icon("eye", 18) }}</button>
+    </div>
+    <p class="error" data-error-for="password" hidden>Please enter your password.</p>
+  </div>
+  <div class="row-between">
+    <label class="checkbox"><input type="checkbox" name="remember" checked> Remember me</label>
+    <a href="#">Forgot password?</a>
+  </div>
+  <button class="btn btn-primary" type="submit" data-submit>Log in</button>
+</form>
+{% endblock %}

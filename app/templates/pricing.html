@@ -1,0 +1,78 @@
+{% extends "layouts/marketing.html" %}
+{% from "partials/icons.html" import icon %}
+
+{#- Plan data lives here for now. Later it can come from the backend/database. -#}
+{% set plans = [
+  {"name": "Free", "for": "For trying it out", "monthly": 0, "yearly": 0, "unit": "/month",
+   "cta": "Start for free", "href": "/register",
+   "features": ["50 messages per day", "Save up to 10 conversations", "Standard response speed", "Web and mobile access"]},
+  {"name": "Pro", "for": "For everyday work", "monthly": 15, "yearly": 12, "unit": "/month",
+   "cta": "Get Pro", "href": "/register", "featured": true,
+   "features": ["Unlimited messages", "Unlimited saved conversations", "Faster responses", "Longer conversation memory", "Priority email support"]},
+  {"name": "Team", "for": "For small teams", "monthly": 36, "yearly": 29, "unit": "/user/month",
+   "cta": "Contact sales", "href": "/contact",
+   "features": ["Everything in Pro", "Shared team workspace", "Admin and user management", "Usage reports"]}
+] %}
+
+{% set faqs = [
+  ("Can I switch plans later?", "Yes. You can upgrade or downgrade at any time from your account settings, and the change applies from your next billing date."),
+  ("Is my data used to train AI models?", "No. Your conversations are stored privately in your account and are not used for training."),
+  ("What counts as a message?", "Each question you send counts as one message. AI replies don't count toward your limit."),
+  ("Do you offer discounts for students or nonprofits?", "Yes. Contact us with proof of status and we'll apply a discount to the Pro plan.")
+] %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span>Pricing</span>
+    <h1>Simple plans that grow with you</h1>
+    <p class="lede">Start free. Upgrade when you need more messages, longer memory or a shared team workspace.</p>
+    {#- main.js swaps the prices using the data-monthly / data-yearly attributes -#}
+    <div class="toggle" role="group" aria-label="Billing period" data-billing-toggle>
+      <button type="button" data-period="monthly" aria-pressed="false">Monthly</button>
+      <button type="button" data-period="yearly" aria-pressed="true" class="on">Yearly <em>−20%</em></button>
+    </div>
+  </div>
+</section>
+
+<section class="pt-sm">
+  <div class="wrap">
+    <div class="plans">
+      {% for p in plans %}
+        <article class="plan{% if p.featured %} featured{% endif %}">
+          {% if p.featured %}<span class="badge">Most popular</span>{% endif %}
+          <h3>{{ p.name }}</h3>
+          <p class="for">{{ p.for }}</p>
+          <p class="price">$<span data-monthly="{{ p.monthly }}" data-yearly="{{ p.yearly }}">{{ p.yearly }}</span><small>{{ p.unit }}</small></p>
+          <a class="btn {{ 'btn-primary' if p.featured else 'btn-ghost' }}" href="{{ p.href }}">{{ p.cta }}</a>
+          <ul>
+            {% for f in p.features %}<li class="check">{{ icon("check", 18, "#16A37F", 2.4) }}<span>{{ f }}</span></li>{% endfor %}
+          </ul>
+        </article>
+      {% endfor %}
+    </div>
+    <p class="fine center" data-billing-note>Prices in USD, billed yearly. Cancel anytime.</p>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap center">
+    <p class="eyebrow">FAQ</p>
+    <h2>Questions, answered</h2>
+    {#- <details> gives an accessible accordion with zero JavaScript -#}
+    <div class="faq">
+      {% for q, a in faqs %}
+        <details class="q"{% if loop.first %} open{% endif %}>
+          <summary>{{ q }}{{ icon("chevron", 20) }}</summary>
+          <p>{{ a }}</p>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% set cta_title = "Try Averon free today" %}
+{% set cta_text = "No credit card needed. Upgrade only when you're ready." %}
+{% set cta_button = "Start for free" %}
+{% include "partials/cta_band.html" %}
+{% endblock %}

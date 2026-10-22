@@ -1,0 +1,57 @@
+{% extends "layouts/marketing.html" %}
+{% from "partials/icons.html" import icon %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span>About us</span>
+    <h1>Making AI feel like a helpful colleague</h1>
+    <p class="lede">We're building an assistant that's simple to use, respects your privacy and remembers the context that matters.</p>
+  </div>
+</section>
+
+<section class="pt-md">
+  <div class="wrap split">
+    <div class="story">
+      <p class="eyebrow">OUR STORY</p>
+      <h2>Why we started Averon</h2>
+      <p>Most AI tools forget everything the moment you close the tab. You end up re-explaining the same project again and again.</p>
+      <p>Averon keeps each conversation saved to your account, so you can return tomorrow and carry on exactly where you stopped — on your phone or your laptop.</p>
+    </div>
+    <div class="visual" aria-hidden="true">
+      <span class="ring" style="--s:180px"></span><span class="ring" style="--s:300px"></span>
+      <span class="ring" style="--s:420px"></span><span class="ring" style="--s:540px"></span>
+      <div class="core">{{ icon("logo", 44, "#4B3BF5", 2.4) }}</div>
+      <span class="chip" style="top:18%;left:10%">✍️ Write</span>
+      <span class="chip" style="top:24%;right:9%">🗓️ Plan</span>
+      <span class="chip" style="bottom:20%;left:14%">🔎 Research</span>
+      <span class="chip" style="bottom:14%;right:13%">💬 Remember</span>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <p class="eyebrow">WHAT WE BELIEVE</p>
+    <h2>The principles behind every decision</h2>
+    <div class="principles">
+      {% for ic, title, text in [
+        ("shield", "Privacy first", "Your conversations belong to you. We store them securely and never sell your data."),
+        ("clock", "Fast by default", "Answers should arrive in seconds, on any connection and any device."),
+        ("lines", "Clear over clever", "Plain language, simple screens and no features you have to learn twice."),
+        ("users", "Built with users", "We ship small improvements often, shaped by what people actually ask for.")
+      ] %}
+        <article class="card">
+          <div class="ic">{{ icon(ic, 22, "#4B3BF5") }}</div>
+          <h3>{{ title }}</h3>
+          <p>{{ text }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% set cta_title = "Come build better habits with AI" %}
+{% set cta_text = "Create your free account and start your first conversation." %}
+{% include "partials/cta_band.html" %}
+{% endblock %}

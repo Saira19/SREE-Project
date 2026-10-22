@@ -1,0 +1,41 @@
+{% extends "layouts/auth.html" %}
+{% from "partials/icons.html" import icon %}
+
+{% set side_title = "Your AI assistant, ready in seconds." %}
+{% set side_points = ["50 free messages every day", "Conversations saved to your account", "Upgrade only when you need to"] %}
+
+{% block top_link %}Already have an account? <a href="/login">Log in</a>{% endblock %}
+
+{% block form %}
+<h1>Create your account</h1>
+<p class="sub">Free forever on the starter plan. No credit card.</p>
+
+<div class="alert" role="alert" data-form-error hidden>
+  {{ icon("alert", 18) }}<span data-form-error-text></span>
+</div>
+
+<form class="form" data-auth-form="register" novalidate>
+  <div class="field-wrap">
+    <label for="r-name">Full name</label>
+    <input class="input" id="r-name" name="full_name" autocomplete="name" required>
+    <p class="error" data-error-for="full_name" hidden>Please enter your name.</p>
+  </div>
+  <div class="field-wrap">
+    <label for="r-email">Email</label>
+    <input class="input" id="r-email" name="email" type="email" autocomplete="email" required>
+    <p class="error" data-error-for="email" hidden>Please enter a valid email.</p>
+  </div>
+  <div class="field-wrap">
+    <label for="r-password">Password</label>
+    <div class="pw-wrap">
+      <input class="input" id="r-password" name="password" type="password" autocomplete="new-password" required minlength="8" aria-describedby="pw-hint">
+      <button class="pw-toggle" type="button" aria-label="Show password" data-pw-toggle>{{ icon("eye", 18) }}</button>
+    </div>
+    <div class="meter" data-pw-meter aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p class="hint" id="pw-hint" data-pw-hint>At least 8 characters.</p>
+    <p class="error" data-error-for="password" hidden>Password must be at least 8 characters.</p>
+  </div>
+  <button class="btn btn-primary" type="submit" data-submit>Create account</button>
+</form>
+<p class="terms">By signing up you agree to our <a href="#">Terms of service</a> and <a href="#">Privacy policy</a>.</p>
+{% endblock %}

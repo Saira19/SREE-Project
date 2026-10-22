@@ -1,0 +1,37 @@
+{#- Layout for log in / sign up: brand panel on the left, form on the right.
+    No marketing header/footer, so nothing distracts from the form.
+    Child pages set `side_title` and `side_points` at their top, e.g.
+      {% set side_points = ["...", "..."] %}                                -#}
+{% extends "base.html" %}
+{% from "partials/icons.html" import icon, logo %}
+
+{% block body %}
+<div class="auth">
+  <aside class="auth-side" aria-hidden="true">
+    {{ logo(mark_bg="#fff", mark_color="#4B3BF5") }}
+    <h2>{{ side_title }}</h2>
+    <ul>
+      {% for point in side_points %}
+        <li class="check">{{ icon("check", 18, "#fff", 2.4) }}<span>{{ point }}</span></li>
+      {% endfor %}
+    </ul>
+    <p class="auth-copy">© 2026 Averon AI</p>
+    <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+  </aside>
+
+  <main class="auth-main" id="main">
+    <div class="auth-top">
+      <span class="mobile-logo">{{ logo() }}</span>
+      <span>{% block top_link %}{% endblock %}</span>
+    </div>
+    <div class="auth-box">
+      {% block form %}{% endblock %}
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', path='js/api.js') }}" defer></script>
+  <script src="{{ url_for('static', path='js/auth.js') }}" defer></script>
+{% endblock %}

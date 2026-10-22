@@ -1,0 +1,81 @@
+{% extends "layouts/marketing.html" %}
+{% from "partials/icons.html" import icon %}
+
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span>Your AI assistant, ready in seconds</span>
+      <h1>Ask anything.<br>Get answers that <span>remember you.</span></h1>
+      <p class="lede">An AI assistant that keeps your conversations, picks up where you left off, and helps you write, plan and research faster.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/register">Start for free {{ icon("arrow", 16) }}</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <div class="trust">
+        <span><b>Private by default</b> · your chats stay yours</span>
+        <span><b>No credit card</b> needed</span>
+      </div>
+    </div>
+
+    {#- A static example conversation: it illustrates the product, it isn't live -#}
+    <div class="chat" role="img" aria-label="Example conversation with the Averon assistant">
+      <div class="chat-top">
+        <span class="mark mark-sm">{{ icon("logo", 14, "#fff", 2.6) }}</span>Averon Assistant
+        <span class="status"><i></i>Online</span>
+      </div>
+      <div class="msgs">
+        <div class="m u">Plan a 3-day content calendar for a coffee shop launch.</div>
+        <div class="m a">Here's a simple plan:
+          <ul>
+            <li><b>Day 1</b> — Behind the scenes: roasting &amp; setup</li>
+            <li><b>Day 2</b> — Menu reveal with a signature drink</li>
+            <li><b>Day 3</b> — Opening offer + countdown story</li>
+          </ul>
+        </div>
+        <div class="m u">Make Day 2 a short reel script.</div>
+        <div class="typing"><i></i><i></i><i></i></div>
+      </div>
+      <div class="composer">
+        <div class="field">Message Averon…</div>
+        <span class="send">{{ icon("arrow", 18, "#fff", 2.2) }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">FEATURES</p>
+    <h2>Everything you need from an AI assistant</h2>
+    <p class="sub">Built to be fast, private and easy to come back to.</p>
+    <div class="cards">
+      {% for ic, title, text in [
+        ("chat", "Conversations that remember", "Every chat is saved, so you can reopen it and continue with full context."),
+        ("lock", "Private and secure", "Encrypted passwords and token-based login. Only you can see your conversations."),
+        ("devices", "Works on any device", "A clean, responsive interface that feels the same on your phone and laptop.")
+      ] %}
+        <article class="card">
+          <div class="ic">{{ icon(ic, 22, "#4B3BF5") }}</div>
+          <h3>{{ title }}</h3>
+          <p>{{ text }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <p class="eyebrow">HOW IT WORKS</p>
+    <h2>Up and running in three steps</h2>
+    <ol class="steps">
+      <li><div class="num">1</div><h3>Create your account</h3><p>Sign up with your email in under a minute.</p></li>
+      <li><div class="num">2</div><h3>Start a conversation</h3><p>Ask a question, paste a draft or describe what you need.</p></li>
+      <li><div class="num">3</div><h3>Pick up anytime</h3><p>Your chats are saved to your dashboard, ready when you return.</p></li>
+    </ol>
+  </div>
+</section>
+
+{% include "partials/cta_band.html" %}
+{% endblock %}
